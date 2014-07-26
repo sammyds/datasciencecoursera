@@ -32,14 +32,20 @@ Predictive models were created as listed below. Please refer to Output 2.1 for t
 1. The following variables are not directly related to the accelerometer readings. They were not included in the model.
 
   user_name
+  
   cvtd_timestamp
+  
   classe
+  
   X
+  
   raw_timestamp_part_1
+  
   raw_timestamp_part_2
+  
   new_window
   
-2. From the remaining variables all the sparsely populated variables (that have less than 50% of data) were also excluded from the model.
+2. From the remaining variables, all the sparsely populated variables (that have less than 50% of data) were also excluded from the model.
 
 3. The training data was split into true training (15%) and cross-validation data sets (85%)
 
@@ -49,7 +55,7 @@ Predictive models were created as listed below. Please refer to Output 2.1 for t
   
   b) gradient boosing
 
-5. The two models were then used to predict the outcome of the observations in the cross-validation data set as well as the testing data set.
+5. The two models were then used to predict the outcomes of the observations in the cross-validation data set as well as the testing data set.
 
 6. The accuracy was measured by comparing the predicted values with the actual values in the cross-validation data set.
 
@@ -61,13 +67,15 @@ Predictive models were created as listed below. Please refer to Output 2.1 for t
 
 The accuracy and out of sample error for the two models considered were
 
-Random forests      - Accuracy = 94.5% ; Out of sample error = 5.5%
-Gradient boosing    - Accuracy = 93.4% ; Out of sample error = 6.6%
+Random forests      - Accuracy = 97.6% ; Out of sample error = 2.4%
 
-The prediction accuracy on the 20 test observations was 100%
+Gradient boosing    - Accuracy = 96.7% ; Out of sample error = 3.3%
+
+The prediction accuracy of the 20 test observations was 100%
+
+
 
 ## Appendix
-
 
 ========================================================
 
@@ -82,7 +90,7 @@ library (splines)
 library (plyr)
 
 # set training sample percentage
-trSamplePct = 0.05
+trSamplePct = 0.15
 
 set.seed (233)
 
@@ -152,8 +160,6 @@ cleanupData = function (df) {
 
 # add missing variable classe to testing data set                    
 testing$classe = "E"
-
-ptm = proc.time ()
 
 # cleanup the training and testing data sets
 trainingClean = cleanupData (training)

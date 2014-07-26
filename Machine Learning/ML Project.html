@@ -214,21 +214,27 @@ hljs.initHighlightingOnLoad();
 <ol>
 <li><p>The following variables are not directly related to the accelerometer readings. They were not included in the model.</p>
 
-<p>user_name
-cvtd_timestamp
-classe
-X
-raw_timestamp_part_1
-raw_timestamp_part_2
-new_window</p></li>
-<li><p>From the remaining variables all the sparsely populated variables (that have less than 50% of data) were also excluded from the model.</p></li>
+<p>user_name</p>
+
+<p>cvtd_timestamp</p>
+
+<p>classe</p>
+
+<p>X</p>
+
+<p>raw_timestamp_part_1</p>
+
+<p>raw_timestamp_part_2</p>
+
+<p>new_window</p></li>
+<li><p>From the remaining variables, all the sparsely populated variables (that have less than 50% of data) were also excluded from the model.</p></li>
 <li><p>The training data was split into true training (15%) and cross-validation data sets (85%)</p></li>
 <li><p>The following two methods were applied to the true training data set</p>
 
 <p>a) random forests </p>
 
 <p>b) gradient boosing</p></li>
-<li><p>The two models were then used to predict the outcome of the observations in the cross-validation data set as well as the testing data set.</p></li>
+<li><p>The two models were then used to predict the outcomes of the observations in the cross-validation data set as well as the testing data set.</p></li>
 <li><p>The accuracy was measured by comparing the predicted values with the actual values in the cross-validation data set.</p></li>
 <li><p>These steps were repeted a few times to get the average out of sample error Output 2.2</p></li>
 </ol>
@@ -237,10 +243,11 @@ new_window</p></li>
 
 <p>The accuracy and out of sample error for the two models considered were</p>
 
-<p>Random forests      - Accuracy = 94.5% ; Out of sample error = 5.5%
-Gradient boosing    - Accuracy = 93.4% ; Out of sample error = 6.6%</p>
+<p>Random forests      - Accuracy = 97.6% ; Out of sample error = 2.4%</p>
 
-<p>The prediction accuracy on the 20 test observations was 100%</p>
+<p>Gradient boosing    - Accuracy = 96.7% ; Out of sample error = 3.3%</p>
+
+<p>The prediction accuracy of the 20 test observations was 100%</p>
 
 <h2>Appendix</h2>
 
@@ -284,7 +291,7 @@ library(splines)
 library(plyr)
 
 # set training sample percentage
-trSamplePct = 0.05
+trSamplePct = 0.15
 
 set.seed(233)
 
@@ -470,8 +477,6 @@ cleanupData = function(df) {
 # add missing variable classe to testing data set
 testing$classe = &quot;E&quot;
 
-ptm = proc.time()
-
 # cleanup the training and testing data sets
 trainingClean = cleanupData(training)
 
@@ -534,7 +539,7 @@ print(paste0(&quot;Random forests - Out of sample error (%) = &quot;, round((1 -
     100, 1)))
 </code></pre>
 
-<pre><code>## [1] &quot;Random forests - Out of sample error (%) = 6.9&quot;
+<pre><code>## [1] &quot;Random forests - Out of sample error (%) = 2.4&quot;
 </code></pre>
 
 <pre><code class="r">
@@ -542,7 +547,7 @@ print(paste0(&quot;Gradient Boosting - Out of sample error (%) = &quot;, round((
     100, 1)))
 </code></pre>
 
-<pre><code>## [1] &quot;Gradient Boosting - Out of sample error (%) = 9.2&quot;
+<pre><code>## [1] &quot;Gradient Boosting - Out of sample error (%) = 3.3&quot;
 </code></pre>
 
 </body>
