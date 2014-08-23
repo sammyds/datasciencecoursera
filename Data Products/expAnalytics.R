@@ -103,7 +103,7 @@ summaryPlot = function (ageGroup = "24 & Under",
     geom_bar (stat="identity",
               position=position_dodge(), size=.1) +
     labs (title = 
-            "Your annual expenditure Vs U.S. national average") +
+            "Your household annual expenditure Vs U.S. national average") +
     scale_x_discrete ("Expense Type") +
     scale_y_continuous ("Expenditure in $") +
     theme (axis.text.x = element_text (angle = 90)) 
@@ -142,12 +142,13 @@ summaryText = function (ageGroup = "24 & Under",
     diffAmt = round (avgAnnualExp - natAvgAnnualExp)
     diffPct = round (diffAmt/natAvgAnnualExp * 100)
     
-    underOver = ifelse (diffAmt < 0, "under", "over")
+    underOver = ifelse (diffAmt < 0, "below", "above")
     
     # set summaryTxt
-    textObj = paste0 ("Your annual expenditure is $", abs (diffAmt),
+    textObj = paste0 ("Your household annual expenditure ($", avgAnnualExp, ")",
+                      " is $", abs (diffAmt),
                       " (", abs (diffPct), "%) ",
-                      underOver, " the national average")
+                      underOver, " the national average ($", natAvgAnnualExp, ")")
     
   } else {
     textObj = ""

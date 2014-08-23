@@ -1,0 +1,71 @@
+Annual Expenditure Analyzer
+========================================================
+
+
+author: sammyds
+
+date: Aug 22, 2014
+
+
+
+Overview
+========================================================
+
+- This application allows a user to compare his/her household annual expenditure with that of Americans in a similar situation
+
+- The comparison is done across different expenditure categories
+
+- The average annual expenditure data is gathered from the Consumer Spending reports published by The U.S. Bureau of Labor Statistics
+
+
+The Application 
+========================================================
+
+- The Consumer Spending data is very detailed, in terms of demographics and categories of spending
+
+- The application categorizes the demographics into the following groups
+    - Age Group, Income Level, Region of residence & Race
+
+- The application groups the spending categories into the following
+
+    - Food Expenses, Housing Expenses, Utilities, Transporation, Entertainment & Misc. Expenses
+
+
+How it works
+========================================================
+
+- The user accesses the application http://sammyds.shinyapps.io/expApp/
+
+- The application shows the default American national average expendiure data, collected from the U.S. Bureau of Labor Statistics
+
+- The user inputs his/her relevant demographic and expenditure data
+
+- The application re-calculates the national avarages for that demographic group and shows comparisons
+
+
+Sample Plot - National average spending by Age Group
+========================================================
+```{r echo = FALSE, eval=TRUE}
+library (ggplot2)
+
+plotData = function (category, xlabAngle = 0) {
+  
+  tmpDf = droplevels (subset (expDf, Category == category))
+  
+  ggplot(data=tmpDf, 
+       aes(x=CategoryValue, y=ExpenseValue, group = ExpenseType,
+           color = ExpenseType)) + 
+      geom_line() + geom_point() +
+      labs (title = 
+          paste0 ("Expenditure by ", category)) +
+      scale_x_discrete (category) +
+      scale_y_continuous ("Expenditure in $") +
+      theme (axis.text.x = element_text (angle = xlabAngle))
+
+}
+
+expDf = read.csv ("Expense Summary Normalized.csv")
+
+plotData ("Age group")
+
+```
